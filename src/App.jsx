@@ -1,5 +1,11 @@
+import Body from "./components/Body";
+
 function App() {
-  return <h1 className="font-extrabold text-blue-600 p-8">NetflixGPT</h1>;
+  return (
+    <div>
+      <Body />
+    </div>
+  );
 }
 
 export default App;
