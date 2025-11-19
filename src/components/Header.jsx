@@ -12,7 +12,7 @@ const Header = () => {
       {/* Sign In Button */}
       <CustomButton
         text="Sign In"
-        width="w-[102px]"
+        width="w-[100px]"
         textColor="text-white"
         bgColor="#C11119"
       />
