@@ -3,7 +3,7 @@ import CustomButton from "./CustomButton";
 
 const Header = () => {
   return (
-    <div className="absolute top-0 left-0 w-full flex justify-between items-center px-20 py-2 bg-gradient-to-b from-black">
+    <div className="absolute top-0 left-0 w-full flex justify-between items-center px-20 py-2 bg-gradient-to-b from-black z-10">
       {/* Logo */}
       <div>
         <img className="w-[140px]" src={APP_LOGO} alt="app-logo" />
