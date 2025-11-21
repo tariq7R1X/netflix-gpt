@@ -1,10 +1,26 @@
 import Header from "./Header";
 import BG_IMG from "../assets/background-img.jpg";
 import CustomButton from "./CustomButton";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { checkValidData } from "../utils/validate";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const fullName = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
+
+  const handleButtonClick = () => {
+    const validationMessage = checkValidData(
+      fullName.current.value,
+      email.current.value,
+      password.current.value
+    );
+    setErrorMessage(validationMessage);
+  };
+
   const toggleSignInForm = () => {
     setIsSignIn(!isSignIn);
   };
@@ -21,12 +37,16 @@ const Login = () => {
 
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
-      <form className="w-3/12 absolute p-12 bg-black/80 rounded-2xl my-36 mx-auto right-0 left-0 text-white">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="w-3/12 absolute p-12 bg-black/80 rounded-2xl my-36 mx-auto right-0 left-0 text-white"
+      >
         <h1 className="font-bold text-3xl py-4">
           {isSignIn ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignIn && (
           <input
+          ref={fullName}
             type="text"
             placeholder="Full Name"
             className="p-3 my-4 w-full border rounded-md bg-gray-700"
@@ -34,17 +54,22 @@ const Login = () => {
         )}
 
         <input
+          ref={email}
           type="text"
           placeholder="Email Address"
           className="p-3 my-4 w-full border rounded-md bg-gray-700"
         />
+
         <input
+          ref={password}
           type="password"
           placeholder="Password"
-          className="p-3 my-4 mb-6 w-full border rounded-md bg-gray-700"
+          className="p-3 my-4  w-full border rounded-md bg-gray-700"
         />
+        <p className="text-red-600 mb-6">{errorMessage}</p>
         <CustomButton
           text={isSignIn ? "Sign In" : "Sign Up"}
+          onClick={handleButtonClick}
           width="w-full"
           textColor="text-white"
           bgColor="#C11119"
