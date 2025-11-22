@@ -3,6 +3,11 @@ import BG_IMG from "../assets/background-img.jpg";
 import CustomButton from "./CustomButton";
 import { useRef, useState } from "react";
 import { checkValidData } from "../utils/validate";
+import { auth } from "../utils/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -14,11 +19,51 @@ const Login = () => {
 
   const handleButtonClick = () => {
     const validationMessage = checkValidData(
-      fullName.current.value,
+      isSignIn ? "" : fullName.current.value,
       email.current.value,
-      password.current.value
+      password.current.value,
+      isSignIn
     );
+
     setErrorMessage(validationMessage);
+
+    if (validationMessage) return;
+
+    if (!isSignIn) {
+      // sign up logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    } else {
+      // sign in logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    }
   };
 
   const toggleSignInForm = () => {
@@ -46,7 +91,7 @@ const Login = () => {
         </h1>
         {!isSignIn && (
           <input
-          ref={fullName}
+            ref={fullName}
             type="text"
             placeholder="Full Name"
             className="p-3 my-4 w-full border rounded-md bg-gray-700"
@@ -74,10 +119,11 @@ const Login = () => {
           textColor="text-white"
           bgColor="#C11119"
         />
-        <p className="py-2 pt-6 cursor-pointer" onClick={toggleSignInForm}>
-          {isSignIn
-            ? "New to Netlfix? Sign Up Now"
-            : "Already Member? Sign In Now"}
+        <p className="py-2 pt-6 cursor-pointer">
+          {isSignIn ? "New to Netflix? " : "Already Member? "}
+          <span className="font-medium underline" onClick={toggleSignInForm}>
+            {isSignIn ? "Sign Up Now" : "Sign In Now"}
+          </span>
         </p>
       </form>
     </div>
