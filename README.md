@@ -1,29 +1,35 @@
 # NetflixGPT
 
-### Setup project with vite
-
-- npm create vite@latest netflix-gpt
-- initializd with git
-
-- Configured tailwindcss
-  - npm install tailwindcss @tailwindcss/vite
-  - Add `tailwindcss/vite` plugin to your Vite configuration
-  - Add on `@import` to your CSS file that imports Tailwind CSS
+⦁ Vite
+⦁ Configured Tailwindcss
+⦁ Header
+⦁ Routing of App
+⦁ Login Form
+⦁ Sign up Form
+⦁ Form Validation
+⦁ useRef Hook
+⦁ Firebase setup
+⦁ Deploying our app to Production
+⦁ Create Sign Up User Account
+⦁ Install Redux npm i -D @reduxjs/toolkit and npm i react-redux
+⦁ Implemented Sign Out
+⦁ Update Profile
 
 ## Features:
 
-- Login/Sign Up
+⦁ Login/Sign Up
+  - Sign In/Sign Up Form
+  - Redirect to Browse Page
 
-  - Sign In/Sign Up Form
-  - Redirect to Browse Page
+⦁ Browse (After Authentication)
+  - Header
+  - Main Movie
+  - Trailer in Background
+  - Title and Description
+  -Movie Suggestions
+  -Movie Lists \* N
+NetflixGPT
+  - search bar
+  - movie suggestions
 
-- Browse (After Authentication)
-  - Header
-  - Main Movie
-    - Trailer in Background
-    - Title and Description
-      - Movie Suggestions
-      - Movie Lists \* N
-- NetflixGPT
-  - Search bar
-  - Movie suggestions
+# formic library for long forms
