@@ -2,9 +2,10 @@ import APP_LOGO from "../assets/netflix-logo.png";
 import CustomButton from "./CustomButton";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { removeUser } from "../utils/userSlice";
+import { addUser, removeUser } from "../utils/userSlice";
 import { auth } from "../utils/firebase";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { useEffect } from "react";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
@@ -13,14 +14,33 @@ const Header = () => {
 
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {
-        dispatch(removeUser());
-        navigate("/");
-      })
+      .then(() => {})
       .catch((error) => {
         // An error happened.
       });
   };
+
+  useEffect(() => {
+    const unsubsrcibe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
+        navigate("/browse");
+      } else {
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+    return () => unsubsrcibe();
+  }, []);
+
   return (
     <div
       className="absolute top-0 left-0 w-full flex justify-between items-center 
