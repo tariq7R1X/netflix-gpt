@@ -11,10 +11,12 @@ import {
 } from "firebase/auth";
 import { addUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
   const fullName = useRef(null);
@@ -125,12 +127,25 @@ const Login = () => {
           className="p-3 my-4 w-full border rounded-md bg-gray-700"
         />
 
-        <input
-          ref={password}
-          type="password"
-          placeholder="Password"
-          className="p-3 my-4  w-full border rounded-md bg-gray-700"
-        />
+        <div className="relative w-full">
+          <input
+            ref={password}
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            className="p-3 my-4 w-full border rounded-md bg-gray-700 pr-12"
+          />
+          <span
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300 cursor-pointer"
+          >
+            {showPassword ? (
+              <EyeIcon className="w-5 h-5" />
+            ) : (
+              <EyeSlashIcon className="w-5 h-5" />
+            )}
+          </span>
+        </div>
+
         <p className="text-red-600 mb-6">{errorMessage}</p>
         <CustomButton
           text={isSignIn ? "Sign In" : "Sign Up"}
