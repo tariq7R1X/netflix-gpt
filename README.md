@@ -14,6 +14,18 @@
 ⦁ Install Redux npm i -D @reduxjs/toolkit and npm i react-redux
 ⦁ Implemented Sign Out
 ⦁ Update Profile
+⦁ BugFix: Sign up user displayName and Profile picture update
+⦁ BugFix: If the user is not logged in Redirect /browse to Login Page and vice-versa
+⦁ Register TMDB API & create an app & get access token
+⦁ Get data from TMDB now playing movies list API
+⦁ Custom Hook for Now Playing Movies
+⦁ Create movieSlice
+⦁ Update Store with movies data
+⦁ Planning for MianContainer & Secondary Container
+⦁ Fetch Data for Trailer Video
+⦁ Update store with Trailer Video Data
+⦁ Embedded the youtube video and make it autoplay and mute
+⦁ Tailwind Class to make Main Container look awesome
 
 ## Features:
 

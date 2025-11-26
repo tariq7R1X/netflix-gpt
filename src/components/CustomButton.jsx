@@ -4,19 +4,23 @@ const CustomButton = ({
   textColor = "text-white",
   bgColor = "#C11119",
   imgSrc,
+  icon: Icon,
+  fontSize = "text-base",
+  fontWeight = "font-semibold",
   onClick,
 }) => {
   return (
     <button
       onClick={onClick}
       className={`
-    ${width} ${textColor} 
-    py-3 px-4 rounded-lg font-semibold 
-    hover:opacity-90 transition cursor-pointer 
-    flex items-center justify-center gap-2
-  `}
+        ${width} ${textColor} ${fontSize} ${fontWeight}
+        py-3 px-4 rounded-lg 
+        hover:opacity-90 transition cursor-pointer 
+        flex items-center justify-center gap-2
+      `}
       style={{ backgroundColor: bgColor }}
     >
+      {Icon && <Icon className="w-7 h-7" />}
       {imgSrc && (
         <img
           src={imgSrc}
@@ -25,8 +29,7 @@ const CustomButton = ({
         />
       )}
 
-      {/* Text will always stay centered */}
-      <span className={`${imgSrc ? "" : "mx-auto"}`}>{text}</span>
+      <span className={`${imgSrc || Icon ? "" : "mx-auto"}`}>{text}</span>
     </button>
   );
 };
