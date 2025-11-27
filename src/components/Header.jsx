@@ -42,7 +42,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full flex justify-between items-center px-20 py-2 bg-gradient-to-t from-[#0A1A2F]/50 to-transparent z-20">
+    <div className="fixed top-0 left-0 w-full flex justify-between items-center px-20 py-2 bg-gradient-to-t from-[#0A1A2F]/20 to-transparent z-20">
       {/* Logo */}
       <div>
         <img className="w-[140px]" src={APP_LOGO} alt="app-logo" />
